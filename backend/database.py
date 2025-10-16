@@ -11,7 +11,22 @@ load_dotenv()
 
 # Database setup
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./ecommerce.db")
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+
+# Handle SQLite vs PostgreSQL
+if DATABASE_URL.startswith("sqlite"):
+    engine = create_engine(
+        DATABASE_URL,
+        connect_args={"check_same_thread": False}
+    )
+elif DATABASE_URL.startswith("postgresql"):
+    engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+else:
+    # Default to SQLite for local development
+    engine = create_engine(
+        "sqlite:///./ecommerce.db",
+        connect_args={"check_same_thread": False}
+    )
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
