@@ -117,7 +117,7 @@ async def recommend_products(
             "category": p.category,
             "price": p.price,
             "description": p.description,
-            "tags": p.tags
+            "tags": p.tags.split(",") if p.tags else []
         }
         for p in recommended_products
     ]
@@ -177,7 +177,7 @@ async def get_all_products(
                 "category": p.category,
                 "price": p.price,
                 "description": p.description,
-                "tags": p.tags
+                "tags": p.tags.split(",") if p.tags else []
             }
             for p in products
         ]
@@ -197,7 +197,7 @@ async def get_product(product_id: int, db: Session = Depends(get_db)):
         "category": product.category,
         "price": product.price,
         "description": product.description,
-        "tags": product.tags
+        "tags": product.tags.split(",") if product.tags else []
     }
 
 

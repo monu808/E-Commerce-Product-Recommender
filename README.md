@@ -1,64 +1,111 @@
 # 🛍️ E-Commerce Product Recommender System
 
-An intelligent product recommendation system that combines **machine learning algorithms** with **AI-powered explanations** to deliver personalized shopping experiences.
+An intelligent **full-stack** product recommendation system that combines **machine learning algorithms** with **AI-powered explanations** to deliver personalized shopping experiences.
 
 ## 🎯 Overview
 
-This project demonstrates how to build a modern recommendation system that:
-- Analyzes user behavior (views, clicks, purchases)
-- Recommends relevant products using content-based filtering
-- Explains recommendations in natural language using LLM (OpenAI GPT)
-- Provides a RESTful API for easy integration
+This project demonstrates how to build a complete modern recommendation system with:
+- **Backend**: FastAPI REST API with content-based filtering algorithm
+- **Frontend**: Beautiful Next.js/React UI with Tailwind CSS
+- **AI Integration**: OpenAI GPT-powered natural language explanations
+- **Database**: SQLite with SQLAlchemy ORM for data persistence
 
 ## ✨ Key Features
 
-- **Smart Recommendations**: Content-based filtering algorithm that learns from user interactions
-- **AI Explanations**: Natural language explanations powered by OpenAI GPT
-- **RESTful API**: Built with FastAPI for high performance and easy integration
-- **SQLite Database**: Lightweight and portable database with SQLAlchemy ORM
-- **Mock Data**: Pre-populated with realistic e-commerce data for immediate testing
-- **Production Ready**: Includes error handling, CORS support, and API documentation
+### Backend (FastAPI)
+- ✅ **Smart Recommendations**: Content-based filtering algorithm that learns from user interactions
+- ✅ **AI Explanations**: Natural language explanations powered by OpenAI GPT-3.5
+- ✅ **RESTful API**: 7 endpoints with automatic OpenAPI documentation
+- ✅ **Database**: SQLite with pre-seeded demo data (4 users, 15 products)
+- ✅ **CORS Support**: Ready for frontend integration
+- ✅ **Error Handling**: Comprehensive error handling and fallbacks
+
+### Frontend (Next.js)
+- ✅ **Modern UI**: Clean, responsive design with Tailwind CSS
+- ✅ **User Selection**: Dropdown to switch between different users
+- ✅ **Product Cards**: Beautiful gradient cards with hover effects
+- ✅ **AI Insights**: Display AI-generated recommendation explanations
+- ✅ **Loading States**: Smooth skeleton loading animations
+- ✅ **Real-time Updates**: Instant recommendations when switching users
 
 ## 🏗️ Architecture
 
 ```
-┌─────────────┐
-│   Client    │
-│  (Browser/  │
-│    App)     │
-└──────┬──────┘
-       │
-       │ HTTP Request
-       ▼
-┌─────────────────────────────────┐
-│      FastAPI Backend            │
-│  ┌──────────────────────────┐  │
-│  │  Recommendation Engine   │  │
-│  │  (Content-Based Filter)  │  │
-│  └──────────────────────────┘  │
-│              ▼                  │
-│  ┌──────────────────────────┐  │
-│  │   OpenAI LLM Integration │  │
-│  │  (Explanation Generator) │  │
-│  └──────────────────────────┘  │
-│              ▼                  │
-│  ┌──────────────────────────┐  │
-│  │   SQLite Database        │  │
-│  │   (Users, Products,      │  │
-│  │    Interactions)         │  │
-│  └──────────────────────────┘  │
-└─────────────────────────────────┘
+┌──────────────────────────────────────────────────────┐
+│                    CLIENT LAYER                       │
+│  ┌────────────────────────────────────────────────┐  │
+│  │   Next.js Frontend (React + TypeScript)       │  │
+│  │   - User Selection Component                   │  │
+│  │   - Product Card Grid                         │  │
+│  │   - AI Explanation Display                    │  │
+│  │   - Axios API Client                          │  │
+│  └────────────────────────────────────────────────┘  │
+└───────────────────────┬──────────────────────────────┘
+                        │ HTTP/REST
+                        ▼
+┌──────────────────────────────────────────────────────┐
+│                   API LAYER                           │
+│  ┌────────────────────────────────────────────────┐  │
+│  │   FastAPI Backend (Python)                    │  │
+│  │   - GET /recommend/{user_id}                  │  │
+│  │   - GET /users                                │  │
+│  │   - GET /products                             │  │
+│  │   - GET /categories                           │  │
+│  └────────────────────────────────────────────────┘  │
+└───────────────────────┬──────────────────────────────┘
+                        │
+        ┌───────────────┴───────────────┐
+        ▼                               ▼
+┌─────────────────┐           ┌──────────────────┐
+│ RECOMMENDATION  │           │   AI LAYER       │
+│     ENGINE      │           │                  │
+│  Content-Based  │           │  OpenAI GPT-3.5  │
+│    Filtering    │           │   Explanation    │
+│  - Category +10 │           │    Generator     │
+│  - Tag +3       │           │                  │
+└────────┬────────┘           └──────────────────┘
+         │
+         ▼
+┌─────────────────────────────┐
+│      DATA LAYER             │
+│  ┌──────────────────────┐   │
+│  │  SQLite Database     │   │
+│  │  - users             │   │
+│  │  - products          │   │
+│  │  - interactions      │   │
+│  └──────────────────────┘   │
+└─────────────────────────────┘
 ```
 
-## 🚀 Quick Start
+## 🚀 Quick Start (1 Command!)
 
 ### Prerequisites
 
-- Python 3.8 or higher
-- pip (Python package installer)
-- OpenAI API key (optional, but recommended)
+- Python 3.8+ installed
+- Node.js 18+ installed
+- OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
 
-### Installation
+### Super Fast Setup
+
+```powershell
+# Run the startup script (starts both backend & frontend)
+.\start.ps1
+```
+
+That's it! The script will:
+1. Start the backend API on `http://127.0.0.1:8000`
+2. Start the frontend app on `http://localhost:3000`
+3. Open both in separate terminal windows
+
+**First time?** Run the backend setup first:
+```powershell
+cd backend
+.\setup.ps1
+```
+
+### Manual Setup (Alternative)
+
+#### 1. Backend Setup
 
 1. **Clone the repository**
    ```bash
