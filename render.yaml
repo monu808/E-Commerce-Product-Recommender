@@ -6,7 +6,8 @@ services:
     region: singapore
     plan: free
     branch: main
-    buildCommand: pip install -r backend/requirements.txt
+    runtime: python
+    buildCommand: pip install --upgrade pip && pip install -r backend/requirements.txt
     startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: OPENAI_API_KEY
@@ -14,4 +15,4 @@ services:
       - key: DATABASE_URL
         sync: false
       - key: PYTHON_VERSION
-        value: 3.11.1
+        value: "3.11"
